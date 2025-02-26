@@ -1,0 +1,41 @@
+<h1>Create New Store</h1>
+
+<%= form_with(model: @store, url: admin_stores_path, local: true) do |form| %>
+  <% if @store.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@store.errors.count, "error") %> prohibited this store from being saved:
+      </h2>
+      <ul>
+        <% @store.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %><br>
+    <%= form.text_field :name, placeholder: "Enter store name" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %><br>
+    <%= form.email_field :email, placeholder: "Enter store email" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address %><br>
+    <%= form.text_area :address, placeholder: "Enter store address" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :owner_id, "Store Owner" %><br>
+    <%= form.collection_select :owner_id, @owners, :id, :name, prompt: "Select a store owner" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Create Store" %>
+  </div>
+<% end %>
+

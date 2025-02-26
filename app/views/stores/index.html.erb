@@ -1,0 +1,43 @@
+<!-- app/views/stores/index.html.erb -->
+<h2>Stores</h2>
+
+<div>
+  <%= form_with(url: stores_path, method: :get, local: true) do |form| %>
+    <div>
+      <%= form.label :name, "Search by name:" %>
+      <%= form.text_field :name, value: params[:name] %>
+    </div>
+    
+    <div>
+      <%= form.label :address, "Search by address:" %>
+      <%= form.text_field :address, value: params[:address] %>
+    </div>
+    
+    <div>
+      <%= form.submit "Search" %>
+    </div>
+  <% end %>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= link_to "Name", stores_path(sort: "name", direction: params[:direction] == "asc" ? "desc" : "asc") %></th>
+      <th><%= link_to "Address", stores_path(sort: "address", direction: params[:direction] == "asc" ? "desc" : "asc") %></th>
+      <th>Overall Rating</th>
+      <th>My Rating</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @stores.each do |store| %>
+      <tr>
+        <td><%= store.name %></td>
+        <td><%= store.address %></td>
+        <td><%= store.average_rating %></td>
+        <td><%= store.ratings.find_by(user_id: current_user.id)&.value || "Not rated" %></td>
+        <td><%= link_to "View & Rate", store_path(store) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

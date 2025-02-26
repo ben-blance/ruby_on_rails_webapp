@@ -1,0 +1,2 @@
+module StoreOwner::DashboardHelper
+end

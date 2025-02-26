@@ -1,0 +1,35 @@
+<!-- app/views/admin/stores/index.html.erb -->
+<h1>Manage Stores</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>Owner</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @stores.each do |store| %>
+      <tr>
+        <td><%= store.id %></td>
+        <td><%= store.name %></td>
+        <td><%= store.email %></td>
+        <td><%= store.address %></td>
+        <td><%= store.owner.name if store.owner %></td>
+        <td>
+          <%= link_to "Edit", edit_admin_store_path(store) %> |
+          <%= link_to "Delete", admin_store_path(store), method: :delete, data: { confirm: "Are you sure you want to delete this store?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to "Create New Store", new_admin_store_path, class: "button" %>
+

@@ -1,0 +1,37 @@
+<!-- app/views/store_owner/dashboard/index.html.erb -->
+<h2>Store Owner Dashboard</h2>
+
+<% if @store %>
+  <div>
+    <h3><%= @store.name %></h3>
+    <p><strong>Address:</strong> <%= @store.address %></p>
+    <p><strong>Email:</strong> <%= @store.email %></p>
+    <p><strong>Average Rating:</strong> <%= @average_rating %></p>
+    <p><strong>Total Reviews:</strong> <%= @ratings.count %></p>
+  </div>
+  
+  <div>
+    <h3>Customer Ratings</h3>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Customer Name</th>
+          <th>Rating</th>
+          <th>Submitted On</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @ratings.each do |rating| %>
+          <tr>
+            <td><%= rating.user.name %></td>
+            <td><%= rating.value %></td>
+            <td><%= rating.created_at.strftime("%B %d, %Y") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p>You do not have any stores assigned to you. Please contact the administrator.</p>
+<% end %>

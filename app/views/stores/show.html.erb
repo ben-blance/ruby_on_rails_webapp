@@ -1,0 +1,23 @@
+<!-- app/views/stores/show.html.erb -->
+<h2><%= @store.name %></h2>
+
+<div>
+  <p><strong>Address:</strong> <%= @store.address %></p>
+  <p><strong>Email:</strong> <%= @store.email %></p>
+  <p><strong>Overall Rating:</strong> <%= @store.average_rating %></p>
+</div>
+
+<div>
+  <h3><%= @rating.persisted? ? "Update Your Rating" : "Submit Your Rating" %></h3>
+  
+  <%= form_with(model: [@store, @rating], local: true) do |form| %>
+    <div>
+      <%= form.label :value, "Rate (1-5):" %>
+      <%= form.select :value, options_for_select((1..5).to_a, @rating.value) %>
+    </div>
+    
+    <div>
+      <%= form.submit @rating.persisted? ? "Update Rating" : "Submit Rating" %>
+    </div>
+  <% end %>
+</div>

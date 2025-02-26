@@ -1,0 +1,19 @@
+<!-- app/views/admin/dashboard/index.html.erb -->
+<h2>Admin Dashboard</h2>
+
+<div>
+  <h3>System Overview</h3>
+  <ul>
+    <li>Total Users: <%= @total_users %></li>
+    <li>Total Stores: <%= @total_stores %></li>
+    <li>Total Ratings: <%= @total_ratings %></li>
+  </ul>
+</div>
+
+<div>
+  <h3>Management</h3>
+  <ul>
+    <li><%= link_to "Manage Users", admin_users_path %></li>
+    <li><%= link_to "Manage Stores", admin_stores_path %></li>
+  </ul>
+</div>
